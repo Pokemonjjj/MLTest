@@ -10,6 +10,7 @@
 """
 
 import math
+import matplotlib
 import operator
 
 
