@@ -100,9 +100,37 @@ def majorityCnt(classList):
     pass
 
 
+def createTree(X, lables):
+    """
+    递归创建树,以多重嵌套字典作为树数据结构
+    :param X:
+    :param lables:
+    :return:
+    """
+    yList = [e[-1] for e in X]
+    # 递归出口条件：当类别完全相同，停止继续划分
+    if yList.count(yList[0]) == len(yList):
+        return yList[0]
+    # 遍历完所有特征时返回出现次数最多的类别
+    if len(X[0]) == 1:
+        return majorityCnt(yList)
+
+    bestFeat = getBestFeatureToSplit(X)
+    bestFeatLabel = labels[bestFeat]
+
+    # 以字典作为树数据结构
+    tree = {bestFeatLabel: dict()}
+    del (labels[bestFeat])
+    featValues = set([e[bestFeat] for e in X])
+    for value in featValues:
+        subLabels = labels[:]
+        tree[bestFeatLabel][value] = createTree(splitDataSet(X, bestFeat, value), subLabels)
+    return tree
+
+
 if __name__ == "__main__":
     X, labels = createDataSet()
-    print getBestFeatureToSplit(X)
+    print createTree(X, labels)
 
     # print splitDataSet(X, 0, 0)
     # print calcShannonEntropy(X)
