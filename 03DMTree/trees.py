@@ -7,7 +7,6 @@
 @File       : trees.py
 @Software   : PyCharm
 @Description: 决策树测试类
-哈哈哈干干干干干干干干干干干干干干干
 """
 
 import math
