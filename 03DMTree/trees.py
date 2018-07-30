@@ -10,7 +10,7 @@
 """
 
 import math
-import matplotlib
+
 import operator
 
 
@@ -68,7 +68,7 @@ def splitDataSet(X, axis, value):
 
 def getBestFeatureToSplit(X):
     """
-    选择最好的数据集划分方式
+    利用香农熵计算信息增益，选择最好的数据集划分方式
     :param X:
     :return:
     """
@@ -100,11 +100,11 @@ def majorityCnt(classList):
     pass
 
 
-def createTree(X, lables):
+def createTree(X, labels):
     """
     递归创建树,以多重嵌套字典作为树数据结构
     :param X:
-    :param lables:
+    :param labels:
     :return:
     """
     yList = [e[-1] for e in X]
@@ -126,6 +126,9 @@ def createTree(X, lables):
         subLabels = labels[:]
         tree[bestFeatLabel][value] = createTree(splitDataSet(X, bestFeat, value), subLabels)
     return tree
+
+
+
 
 
 if __name__ == "__main__":
