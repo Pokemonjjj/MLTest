@@ -25,8 +25,8 @@ def createPlot():
     fig = plt.figure(1, facecolor='white')
     fig.clf()
     createPlot.ax1 = plt.subplot(111, frameon=False)
-    plotNode('决策节点', (0.5, 0.1), (0.1, 0.5), decisionNode)
-    plotNode('叶节点', (0.8, 0.1), (0.3, 0.8), leafNode)
+    plotNode('decisionNode', (0.5, 0.1), (0.1, 0.5), decisionNode)
+    plotNode('leafNode', (0.8, 0.1), (0.3, 0.8), leafNode)
     plt.show()
     pass
 
@@ -51,3 +51,6 @@ def plotNode(nodeTxt, centerPt, parentPt, nodeType):
                             arrowprops=arrow_args)
 
     pass
+
+if __name__ == '__main__':
+    createPlot()
