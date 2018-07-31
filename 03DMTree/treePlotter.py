@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 """
@@ -70,13 +70,15 @@ def plotNode(nodeTxt, centerPt, parentPt, nodeType):
 
 def getNumLeafs(myTree):
     """
-    递归获取叶节点的数目
+    递归求取叶节点的数目
     :param myTree:
     :return:
     """
     numLeafs = 0
     firstStr = myTree.keys()[0]
     secondDict = myTree[firstStr]  # type: dict
+
+    # 遍历myTree的子树
     for key in secondDict.keys():
         if type(secondDict[key]).__name__ == 'dict':
             numLeafs += getNumLeafs(secondDict[key])
@@ -85,10 +87,27 @@ def getNumLeafs(myTree):
     return numLeafs
 
 
-def getTreeDeep(myTree):
-    pass
+def getTreeDepth(myTree):
+    """
+
+    :param myTree:dict
+    :return:
+    """
+    depth = 0
+    secondDict = myTree[myTree.keys()[0]]  # type:dict
+
+    # 遍历myTree的子树
+    for key in secondDict.keys():
+        if type(secondDict[key]).__name__ == "dict":
+            dt = getNumLeafs(secondDict[key]) + 1
+        else:
+            dt = 1
+        depth = dt if dt > depth else depth
+    return depth
 
 
 if __name__ == '__main__':
-    print "测试图"
-    createPlot()
+    print("测试图")
+    # createPlot()
+    print getNumLeafs(data)
+    print getTreeDepth(data)
