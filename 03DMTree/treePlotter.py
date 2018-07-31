@@ -13,8 +13,23 @@ import matplotlib.pyplot as plt
 
 # 定义文本框和箭头
 decisionNode = dict(boxstyle="sawtooth", fc="0.8")
+
 leafNode = dict(boxstyle="round4", fc="0.8")
+
 arrow_args = dict(arrowstyle="<-")
+
+# 字典的层级关系
+data = {
+    'no surfacing': {
+        0: 'no',
+        1: {
+            'flippers': {
+                0: 'no',
+                1: 'yes'
+            }
+        }
+    }
+}
 
 
 def createPlot():
@@ -24,6 +39,7 @@ def createPlot():
     """
     fig = plt.figure(1, facecolor='white')
     fig.clf()
+    # 其中ax1为createPlot函数类的属性，并且为全局变量
     createPlot.ax1 = plt.subplot(111, frameon=False)
     plotNode('decisionNode', (0.5, 0.1), (0.1, 0.5), decisionNode)
     plotNode('leafNode', (0.8, 0.1), (0.3, 0.8), leafNode)
@@ -49,8 +65,29 @@ def plotNode(nodeTxt, centerPt, parentPt, nodeType):
                             ha="center",
                             bbox=nodeType,
                             arrowprops=arrow_args)
-
     pass
+
+
+def getNumLeafs(myTree):
+    """
+    递归获取叶节点的数目
+    :param myTree:
+    :return:
+    """
+    numLeafs = 0
+    firstStr = myTree.keys()[0]
+    secondDict = myTree[firstStr]  # type: dict
+    for key in secondDict.keys():
+        if type(secondDict[key]).__name__ == 'dict':
+            numLeafs += getNumLeafs(secondDict[key])
+        else:
+            numLeafs += 1
+    return numLeafs
+
+
+def getTreeDeep(myTree):
+    pass
+
 
 if __name__ == '__main__':
     print "测试图"

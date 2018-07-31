@@ -128,9 +128,6 @@ def createTree(X, labels):
     return tree
 
 
-
-
-
 if __name__ == "__main__":
     X, labels = createDataSet()
     print createTree(X, labels)

@@ -11,10 +11,21 @@
 """
 
 
+class Man(object):
+
+    @property
+    def num(self):
+        return 0
+
+    @num.setter
+    def num(self, v):
+        return v
+
+    def __init__(self):
+        pass
+
+
 if __name__ == '__main__':
-    print "p"
-    print "p"
-    print "p"
-    print "p"
-    print "p"
+    a1 = Man()
+
     pass
